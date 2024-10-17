@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <video autoplay loop muted class="background-video">
+        <source src="{{ url_for('static', filename='background.mp4') }}" type="video/mp4"> 
+    </video>
+    <div class="content">
+        <h1>Real-Time Weather App</h1>
+        <form method="POST" action="/">
+            <label for="city">City Name:</label>
+            <input type="text" id="city" name="city" required>
+            <button type="submit">Submit</button>
+        </form>
+        {% if weather %}
+        <div class="weather-container">
+            <h3>Weather in {{ weather.city }}:</h3>
+            <img src="http://openweathermap.org/img/wn/{{ weather.icon }}.png" alt="Weather Icon">
+            <p>Temperature: {{ weather.temperature }}°C</p>
+            <p>Humidity: {{ weather.humidity }}%</p>
+            <p>Description: {{ weather.description }}</p>
+            <p>Pollution (PM2.5): {{ weather.pollution }} µg/m³</p>
+        </div>
+        {% endif %}
+        <br>
+        <a href="/emergency"><b>Emergency Services Contact Information</b></a>
+    </div>
+</body>
+</html>
